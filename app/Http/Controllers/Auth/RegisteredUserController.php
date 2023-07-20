@@ -28,6 +28,8 @@ class RegisteredUserController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
+
+    //storeでデータを保存する処理
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
