@@ -1,6 +1,9 @@
 <x-guest-layout>
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
+    
+    <!-- Validation Errors  追記-->
+    {{-- <x-auth-session-errors class="mb-4" :errors="$errors" /> --}}
 
     <form method="POST" action="{{ route('login') }}">
         @csrf
