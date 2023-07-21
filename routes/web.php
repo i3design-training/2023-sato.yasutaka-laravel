@@ -16,7 +16,7 @@ use App\Http\Controllers\ContactFormController;
 |
 */
 
-Route::get('tests/test',[TestController::class,'index']);
+Route::get('tests/test', [TestController::class, 'index']);
 
 Route::get('/', function () {
     return view('welcome');
@@ -27,13 +27,18 @@ Route::get('/', function () {
 //authユーザーだけに表示する
 Route::prefix('contacts')
     ->middleware(['auth'])
-        ->controller(ContactFormController::class)
-            ->name('contacts.')
-                ->group(function(){  
-                    Route::get('/','index')->name('index');
-                    Route::get('/create','create')->name('create');
-                    Route::post('/','store')->name('store');
-                });
+    ->controller(ContactFormController::class)
+    ->name('contacts.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/create', 'create')->name('create');
+        Route::post('/', 'store')->name('store');
+        Route::get('/{id}', 'show')->name('show');
+        Route::get('/{id}/edit', 'edit')->name('edit');
+        Route::post('/{id}', 'update')->name('update');
+        Route::post('/{id}/destroy', 'destroy')->name('destroy');
+
+    });
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -45,4 +50,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
